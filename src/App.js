@@ -1,25 +1,64 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import React, { useState } from "react";
+import Navbar from "./Components/Navbar";
+import Form from "./Components/form";
+import Alert from "./Components/Alert";
+// import About from "./About";
+// import { createRoot } from "react-dom/client";
+// import {
+//   BrowserRouter as Router,
+//   // RouterProvider,
+//   Route,
+//   Routes,
+//   // Link,
+// } from "react-router-dom";
 
 function App() {
+  const [mode, setMode] = useState("dark");
+  const [alert, setAlert] = useState(null);
+
+  const toggleMode = (props) => {
+    if (mode === "light") {
+      setMode("dark");
+      setAlert("Dark Mode has been enabled");
+      setTimeout(() => {
+        setAlert(null);
+      }, 1300);
+    } else {
+      setMode("light");
+      setAlert("Light Mode has been enabled");
+      setTimeout(() => {
+        setAlert(null);
+      }, 1300);
+    }
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Navbar title="Nilesh" mode={mode} toggleMode={toggleMode} />
+      <Alert alert={alert} />
+      {/* <div className="container my-3"><About /></div> */}
+      <Form heading="Enter the text to analyze" />
+    </>
   );
 }
 
 export default App;
+
+
+  /* <Router>
+  <Navbar title="Nilesh" mode={mode} toggleMode={toggleMode} />
+  <Alert alert={alert} />
+  <Routes>
+    <Route
+      exact
+      path="/about"
+      element={
+        <div className="container my-3">
+          <About />
+        </div>
+      }
+    />
+    <Route path="/" element={<Form heading="Enter the text to analyze" />} />
+  </Routes>
+</Router>; */
+
